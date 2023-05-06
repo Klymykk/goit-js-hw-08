@@ -13,9 +13,14 @@ function onInput(evt) {
 
 function onSubmit(evt) {
     evt.preventDefault();
-    console.log(formInput);
-    localStorage.removeItem(LOCAL_KEY);
-    evt.target.reset()
+
+    if(!form.email.value.length || !form.message.value.length){
+      return alert("Заповніть всі поля")
+    } else{
+        console.log(formInput);
+        localStorage.removeItem(LOCAL_KEY);
+        evt.target.reset();
+    }
 };
 
 function checkLocal(){
@@ -24,6 +29,8 @@ function checkLocal(){
         const {email, message} = savedSettings;
         form.email.value = email||'';
         form.message.value = message||'';
+        formInput.email = email||'';
+        formInput.message = message||'';
     }
 }
-checkLocal()
+checkLocal();
